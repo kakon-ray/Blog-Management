@@ -1,6 +1,3 @@
-import { ObjectId } from "mongoose";
-import mongoose from "mongoose";
-import config from "../../config";
 import AppError from "../../errors/AppError ";
 import httpStatus from "http-status";
 import { TBlog } from "./blog.interface";

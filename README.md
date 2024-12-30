@@ -58,7 +58,7 @@ npm run dev
 
 # User Block
 
-- http://localhost:5000/api/admin/users/6772bc63bb075efd53f95de1/block
+- http://localhost:5000/api/admin/users/6772de5590c2048a0c4ca401/block
 
 <!-- Login Admin and block user -->
 

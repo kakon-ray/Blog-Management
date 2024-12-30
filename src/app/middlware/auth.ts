@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import { AnyZodObject } from "zod";
 import catchAsync from "../utils/catchAsync";
 import httpStatus from "http-status";
 import jwt, { JwtPayload } from "jsonwebtoken";
@@ -7,8 +6,6 @@ import config from "../config";
 import { TuserRole } from "../modules/User/user.interface";
 import { User } from "../modules/User/user.model";
 import AppError from "../errors/AppError ";
-
-
 
 const auth = (...requiredRoles: TuserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
@@ -24,8 +21,7 @@ const auth = (...requiredRoles: TuserRole[]) => {
       config.jwt_access_secret as string
     ) as JwtPayload;
 
-    const {role, userId, iat} = decoded
-   
+    const { role, userId } = decoded;
 
     const user = await User.isUserExistsByCustomId(userId);
 
@@ -37,13 +33,10 @@ const auth = (...requiredRoles: TuserRole[]) => {
       );
     }
 
-
     // checking if the user is blocked
     if (user?.isBlocked == true) {
       throw new AppError(400, "The user is blocked");
     }
-
-    
 
     if (requiredRoles && !requiredRoles.includes(role)) {
       throw new AppError(

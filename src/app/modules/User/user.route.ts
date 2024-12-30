@@ -1,5 +1,4 @@
-import express, { NextFunction, Request, Response } from "express";
-import { AnyZodObject, Schema } from "zod";
+import express from "express";
 import validateRequest from "../../middlware/validateRequest";
 import auth from "../../middlware/auth";
 import { USER_ROLE } from "./user.contant";

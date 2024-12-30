@@ -2,9 +2,8 @@ import { StatusCodes } from "http-status-codes";
 import catchAsync from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
 import { BlogServices } from "./blog.service";
-import { string } from "zod";
 
-const createBlog = catchAsync(async (req, res, next) => {
+const createBlog = catchAsync(async (req, res) => {
   const { userId } = req.user;
   const blog = req.body;
   blog.author = userId;
@@ -20,7 +19,7 @@ const createBlog = catchAsync(async (req, res, next) => {
   });
 });
 
-const updateBlog = catchAsync(async (req, res, next) => {
+const updateBlog = catchAsync(async (req, res) => {
   const { userId } = req.user;
   const blog = req.body;
   blog.author = userId;
@@ -36,7 +35,7 @@ const updateBlog = catchAsync(async (req, res, next) => {
   });
 });
 
-const getSingleBlog = catchAsync(async (req, res, next) => {
+const getSingleBlog = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await BlogServices.getSingleBlogIntoDB(id);
 
@@ -49,20 +48,22 @@ const getSingleBlog = catchAsync(async (req, res, next) => {
   });
 });
 
-const deletetBlog = catchAsync(async (req, res, next) => {
+const deletetBlog = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await BlogServices.deleteBlogIntoDB(id);
 
   // utility response function
-  sendResponse(res, {
-    statusCode: StatusCodes.OK,
-    success: true,
-    message: "Blog deleted successfully",
-    data: {},
-  });
+  if (result) {
+    sendResponse(res, {
+      statusCode: StatusCodes.OK,
+      success: true,
+      message: "Blog deleted successfully",
+      data: {},
+    });
+  }
 });
 
-const getAllBlog = catchAsync(async (req, res, next) => {
+const getAllBlog = catchAsync(async (req, res) => {
   const result = await BlogServices.getAllBlogIntoDB(req.query);
 
   // utility response function
