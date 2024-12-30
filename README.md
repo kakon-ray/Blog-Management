@@ -70,3 +70,39 @@ npm run dev
 # Es lint
 
 npm run lint
+
+# Setup Express Project
+
+Initialize a Node.js project।
+npm init -y
+
+Install dependencies
+npm install express mongoose
+
+Install TypeScript and types npm install --save-dev typescript @types/node @types/express @types/mongoose
+
+Initialize TypeScript Create tsconfig.json
+
+npx tsc --init
+
+Create project structure
+
+Set up your TypeScript server
+
+Install ts-node-dev for development: npm install --save-dev ts-node-dev
+
+Run the server in development mode: npm run dev
+
+Install dotenv npm install dotenv
+
+Create a .env file
+
+Create a .env file in the root of your project. This file will hold your environment variables. For example:
+
+Load dotenv in your code
+
+cors install
+
+npm install cors
+
+Setup eslint
