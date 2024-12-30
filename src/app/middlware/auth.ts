@@ -25,6 +25,7 @@ const auth = (...requiredRoles: TuserRole[]) => {
     ) as JwtPayload;
 
     const {role, userId, iat} = decoded
+   
 
     const user = await User.isUserExistsByCustomId(userId);
 

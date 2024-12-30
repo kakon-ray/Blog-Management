@@ -32,7 +32,7 @@ userSchema.pre("save", async function (next) {
 
 // =================== is user exists by custome id ====================
 userSchema.statics.isUserExistsByCustomId = async function (id: string) {
-    return await User.findOne({ id });
+    return await User.findOne({ _id:id });
 };
 
 
