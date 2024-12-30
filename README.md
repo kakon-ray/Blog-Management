@@ -66,3 +66,7 @@ npm run dev
 "email": "thisiskakonray@gmail.com",
 "password": "kakonray1234"
 }
+
+# Es lint
+
+npm run lint
