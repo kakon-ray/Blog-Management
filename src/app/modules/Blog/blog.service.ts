@@ -11,7 +11,7 @@ const createBlogIntoDB = async (payload: TBlog) => {
     const result = await Blog.create(payload);
 
     if (!result) {
-      throw new AppError(httpStatus.BAD_REQUEST, "User creation failed");
+      throw new AppError(httpStatus.BAD_REQUEST, "Blog creation failed");
     }
     return result;
   } catch (err) {
