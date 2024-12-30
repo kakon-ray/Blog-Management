@@ -24,7 +24,6 @@ const createUser = catchAsync(async (req, res, next) => {
 })
 
 const loginUser = catchAsync(async (req, res, next) => {
-
   const result = await UserServices.userLoginIntoDB(req.body)
   const {accessToken, refreshToken} = result;
 
@@ -43,8 +42,25 @@ const loginUser = catchAsync(async (req, res, next) => {
 })
 
 
+// Admin role working
+const blockUser = catchAsync(async (req, res, next) => {
+
+  const {userId} = req.params
+  const result = await UserServices.blockUserIntoDB(userId)
+ 
+  // utility response function
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'User Block Successfully',
+    data: {}
+  })
+})
+
+
 
 export const UserController = {
   createUser,
-  loginUser
+  loginUser,
+  blockUser
 }

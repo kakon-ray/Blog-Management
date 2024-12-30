@@ -21,4 +21,11 @@ router.post(
     UserController.loginUser,
   )
 
+// This route work only admin 
+
+router.patch(
+  '/users/:userId/block',
+  UserController.blockUser,
+)
+
 export const UserRoutes = router
