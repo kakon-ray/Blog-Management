@@ -49,3 +49,6 @@ npm run dev
 
 # Delete Single Blog
 * http://localhost:5000/api/blogs/67726cc0b248b80ef92f90f7
+
+# Get  All Blog
+* http://localhost:5000/api/blogs?search=technology&sortBy=createdAt&sortOrder=desc&filter=6772646fc8775360a09ab4e6

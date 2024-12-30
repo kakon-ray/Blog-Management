@@ -5,6 +5,7 @@ import AppError from '../../errors/AppError '
 import httpStatus from 'http-status'
 import { TBlog } from './blog.interface';
 import { Blog } from './blog.model';
+import QueryBuilder from '../../builder/QueryBuilder';
 
 
 
@@ -65,9 +66,21 @@ const deleteBlogIntoDB = async (id: string) => {
     }
 }
 
+const getAllBlogIntoDB = async (query: Record<string, unknown>) => {
+   const blogsQuery = new QueryBuilder(
+        Blog.find()
+          .populate('author'),
+        query,
+      )
+
+      const result = await blogsQuery.modelQuery
+      return result
+}
+
 export const BlogServices = {
     createBlogIntoDB,
     updateBlogIntoDB,
     getSingleBlogIntoDB,
-    deleteBlogIntoDB
+    deleteBlogIntoDB,
+    getAllBlogIntoDB
 }

@@ -33,7 +33,7 @@ const updateBlog = catchAsync(async (req, res, next) => {
     sendResponse(res, {
         statusCode: StatusCodes.CREATED,
         success: true,
-        message: 'Blog Updated Successfully',
+        message: 'Blog updated successfully',
         data: result,
     })
 })
@@ -59,7 +59,19 @@ const deletetBlog = catchAsync(async (req, res, next) => {
     sendResponse(res, {
         statusCode: StatusCodes.CREATED,
         success: true,
-        message: 'Blog Item delete successfully',
+        message: 'Blog deleted successfully',
+        data: result,
+    })
+})
+
+const getAllBlog = catchAsync(async (req, res, next) => {
+    const result = await BlogServices.getAllBlogIntoDB(req.query)
+
+    // utility response function
+    sendResponse(res, {
+        statusCode: StatusCodes.CREATED,
+        success: true,
+        message: 'Blogs fetched successfully',
         data: result,
     })
 })
@@ -70,5 +82,6 @@ export const BlogController = {
     createBlog,
     updateBlog,
     getSingleBlog,
-    deletetBlog
+    deletetBlog,
+    getAllBlog
 }

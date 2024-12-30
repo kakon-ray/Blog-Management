@@ -37,6 +37,10 @@ router.patch(
     BlogController.deletetBlog,
   )
   
+  router.get(
+    '/',
+    BlogController.getAllBlog,
+  )
 
 
 export const BlogRoutes = router
