@@ -34,3 +34,18 @@ npm run dev
   "title": "The Future of Technology",
   "content": "Technology is evolving rapidly, influencing every aspect of our lives."
 }
+
+
+# Blogs update api
+* http://localhost:5000/api/blogs/67726cc0b248b80ef92f90f7
+{
+  "title": "Kakon Ray",
+  "content": "Technology is evolving rapidly, influencing every aspect of our lives."
+}
+
+
+# Get Single Blog
+* http://localhost:5000/api/blogs/677261696dc3c1cbf1a3debf
+
+# Delete Single Blog
+* http://localhost:5000/api/blogs/67726cc0b248b80ef92f90f7

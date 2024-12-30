@@ -11,34 +11,63 @@ import { Blog } from './blog.model';
 const createBlogIntoDB = async (payload: TBlog) => {
     // find academic semester info
     try {
-        const blog = await Blog.create(payload)
+        const result = await Blog.create(payload)
 
-        if (!blog) {
+        if (!result) {
             throw new AppError(httpStatus.BAD_REQUEST, 'User creation failed')
         }
-        return blog
+        return result
 
     } catch (err) {
         throw new AppError(httpStatus.BAD_REQUEST, err as string)
     }
 }
 
-const updateBlogIntoDB = async (payload: TBlog) => {
+const updateBlogIntoDB = async (id: string, payload: TBlog) => {
     // find academic semester info
     try {
-        const blog = await Blog.create(payload)
+        const result = await Blog.findOneAndUpdate({ _id: id }, payload, {
+            new: true,
+            runValidators: true,
+        },)
 
-        if (!blog) {
-            throw new AppError(httpStatus.BAD_REQUEST, 'User creation failed')
+        if (!result) {
+            throw new AppError(httpStatus.BAD_REQUEST, 'Blog creation failed')
         }
-        return blog
+        return result
 
     } catch (err) {
         throw new AppError(httpStatus.BAD_REQUEST, err as string)
+    }
+}
+
+const getSingleBlogIntoDB = async (id: string) => {
+    const result = await Blog.findOne({ _id: id }).populate('author');
+
+    if (result) {
+        return result
+    } else {
+        throw new AppError(httpStatus.NOT_FOUND, 'Blog Item Not Found')
+    }
+}
+
+const deleteBlogIntoDB = async (id: string) => {
+    const isBlogExists = await Blog.findOne({ _id: id });
+    if (!isBlogExists) {
+        throw new AppError(httpStatus.NOT_FOUND, 'Blog Item Not Found')
+    }
+    const result = await Blog.findOneAndDelete({ _id: id });
+
+    if (result) {
+        return result
+    } else {
+        console.log('Blog not found')
     }
 }
 
 export const BlogServices = {
     createBlogIntoDB,
-    updateBlogIntoDB
+    updateBlogIntoDB,
+    getSingleBlogIntoDB,
+    deleteBlogIntoDB
 }

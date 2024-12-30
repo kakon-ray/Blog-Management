@@ -24,5 +24,19 @@ router.patch(
     BlogController.updateBlog,
   )
   
+  router.get(
+    '/:id',
+    auth(USER_ROLE.user),
+    BlogController.getSingleBlog,
+  )
+  
+
+  router.delete(
+    '/:id',
+    auth(USER_ROLE.user),
+    BlogController.deletetBlog,
+  )
+  
+
 
 export const BlogRoutes = router
