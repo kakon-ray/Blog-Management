@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.post(
   "/",
-  auth(USER_ROLE.user, USER_ROLE.admin),
+  auth(USER_ROLE.user),
   validateRequest(BlogValidation.createBlogValidationSchema),
   BlogController.createBlog
 );
