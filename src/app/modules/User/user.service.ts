@@ -72,9 +72,12 @@ const userLoginIntoDB = async (payload: {
     config.jwt_refresh_expiresh_in as string
   );
 
+  const role = user?.role;
+
   return {
     accessToken,
     refreshToken,
+    role,
   };
 };
 

@@ -23,7 +23,7 @@ const createUser = catchAsync(async (req, res) => {
 
 const loginUser = catchAsync(async (req, res) => {
   const result = await UserServices.userLoginIntoDB(req.body);
-  const { accessToken, refreshToken } = result;
+  const { accessToken, refreshToken, role } = result;
 
   res.cookie("refreshToken", refreshToken, {
     secure: config.NODE_ENV === "production",
@@ -34,7 +34,7 @@ const loginUser = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
-    message: "User Login Successfully",
+    message: `${role === "user" ? "User" : "Admin"} Login Successfully`,
     data: {
       accessToken,
       refreshToken,
