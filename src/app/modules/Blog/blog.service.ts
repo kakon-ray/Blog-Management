@@ -76,7 +76,7 @@ const getAllBlogIntoDB = async (query: Record<string, unknown>) => {
     .filter()
     .sort()
     .paginate()
-    .fields();
+    .authorFilter();
 
   const result = await blogsQuery.modelQuery;
   return result;

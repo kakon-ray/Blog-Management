@@ -47,12 +47,16 @@ class QueryBuilder<T> {
     return this;
   }
 
-  fields() {
-    const fields =
-      (this?.query?.fields as string)?.split(",")?.join(" ") || "-__v";
-    this.modelQuery = this.modelQuery.select(fields);
+  authorFilter() {
+    const authorId = this?.query?.filter as string;
+    if (!authorId) {
+        throw new Error("Author ID is required for filtering.");
+    }
+
+    this.modelQuery = this.modelQuery.find({ author: authorId });
     return this;
-  }
+}
+
 }
 
 export default QueryBuilder;
