@@ -66,17 +66,11 @@ const userLoginIntoDB = async (payload: {
     config.jwt_access_expiresh_in as string
   );
 
-  const refreshToken = createToken(
-    jsonPayload,
-    config.jwt_refresh_secret as string,
-    config.jwt_refresh_expiresh_in as string
-  );
 
   const role = user?.role;
 
   return {
-    accessToken,
-    refreshToken,
+    token:accessToken,
     role,
   };
 };
