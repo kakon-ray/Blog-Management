@@ -22,6 +22,15 @@ const createBlogIntoDB = async (payload: TBlog) => {
 const updateBlogIntoDB = async (id: string, payload: TBlog) => {
   // find academic semester info
   try {
+    const existsBlog = await Blog.findById(id);
+    if(!existsBlog){
+      throw new AppError(httpStatus.BAD_REQUEST, "Blog is not found");
+    }
+
+    if(existsBlog?.author !== payload?.author){
+      throw new AppError(httpStatus.UNAUTHORIZED, "You can not update this blog");
+    }
+
     const result = await Blog.findOneAndUpdate({ _id: id }, payload, {
       new: true,
       runValidators: true,
