@@ -12,7 +12,7 @@ const auth = (...requiredRoles: TuserRole[]) => {
     const strToken = req.headers.authorization;
 
     if (strToken && !strToken.startsWith('Bearer ')) {
-      throw new AppError(httpStatus.UNAUTHORIZED, "Authorization token is missing or invalid provide token (Bearer fasdfasdrfas");
+      throw new AppError(httpStatus.UNAUTHORIZED, "Authorization token is missing or invalid provide token (Bearer fasdfasdrfas)");
     } 
 
     const token = strToken?.split(' ')[1]; 
