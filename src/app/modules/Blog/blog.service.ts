@@ -27,7 +27,8 @@ const updateBlogIntoDB = async (id: string, payload: TBlog) => {
       throw new AppError(httpStatus.BAD_REQUEST, "Blog is not found");
     }
 
-    if(existsBlog?.author !== payload?.author){
+
+    if(String(existsBlog.author) !== String(payload.author)){
       throw new AppError(httpStatus.UNAUTHORIZED, "You can not update this blog");
     }
 
