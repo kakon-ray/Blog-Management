@@ -1,4 +1,6 @@
 import { FilterQuery, Query } from "mongoose";
+import AppError from "../errors/AppError ";
+import { StatusCodes } from "http-status-codes";
 
 class QueryBuilder<T> {
   public modelQuery: Query<T[], T>;
@@ -49,8 +51,9 @@ class QueryBuilder<T> {
 
   authorFilter() {
     const authorId = this?.query?.filter as string;
+
     if (!authorId) {
-        throw new Error("Author ID is required for filtering.");
+      return this;
     }
 
     this.modelQuery = this.modelQuery.find({ author: authorId });
