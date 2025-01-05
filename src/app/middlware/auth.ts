@@ -9,7 +9,13 @@ import AppError from "../errors/AppError ";
 
 const auth = (...requiredRoles: TuserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const token = req.headers.authorization;
+    const strToken = req.headers.authorization;
+
+    if (strToken && !strToken.startsWith('Bearer ')) {
+      throw new AppError(httpStatus.UNAUTHORIZED, "Authorization token is missing or invalid provide token (Bearer fasdfasdrfas");
+    } 
+
+    const token = strToken?.split(' ')[1]; 
 
     // checking is if the token not provide
     if (!token) {

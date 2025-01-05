@@ -17,6 +17,7 @@ const createBlog = catchAsync(async (req, res) => {
     message: "Blog Created Successfully",
     data: result,
   });
+  
 });
 
 const updateBlog = catchAsync(async (req, res) => {
