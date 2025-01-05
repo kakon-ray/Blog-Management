@@ -51,7 +51,8 @@ const getSingleBlog = catchAsync(async (req, res) => {
 
 const deletetBlog = catchAsync(async (req, res) => {
   const { id } = req.params;
-  const result = await BlogServices.deleteBlogIntoDB(id);
+   const { userId } = req.user;
+  const result = await BlogServices.deleteBlogIntoDB(id,userId);
 
   // utility response function
   if (result) {

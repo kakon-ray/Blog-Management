@@ -23,12 +23,12 @@ const updateBlogIntoDB = async (id: string, payload: TBlog) => {
   // find academic semester info
   try {
     const existsBlog = await Blog.findById(id);
-    if(!existsBlog){
+    if (!existsBlog) {
       throw new AppError(httpStatus.BAD_REQUEST, "Blog is not found");
     }
 
 
-    if(String(existsBlog.author) !== String(payload.author)){
+    if (String(existsBlog.author) !== String(payload.author)) {
       throw new AppError(httpStatus.UNAUTHORIZED, "You can not update this blog");
     }
 
@@ -56,11 +56,16 @@ const getSingleBlogIntoDB = async (id: string) => {
   }
 };
 
-const deleteBlogIntoDB = async (id: string) => {
+const deleteBlogIntoDB = async (id: string, userId: string) => {
   const isBlogExists = await Blog.findOne({ _id: id });
   if (!isBlogExists) {
     throw new AppError(httpStatus.NOT_FOUND, "Blog Item Not Found");
   }
+
+  if (String(isBlogExists.author) !== String(userId)) {
+    throw new AppError(httpStatus.UNAUTHORIZED, "You can not Delete this blog");
+  }
+
   const result = await Blog.findOneAndDelete({ _id: id });
 
   if (result) {
