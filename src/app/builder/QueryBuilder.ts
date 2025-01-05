@@ -1,6 +1,5 @@
 import { FilterQuery, Query } from "mongoose";
-import AppError from "../errors/AppError ";
-import { StatusCodes } from "http-status-codes";
+
 
 class QueryBuilder<T> {
   public modelQuery: Query<T[], T>;
